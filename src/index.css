@@ -11,3 +11,76 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#header{
+  display: flex;
+  justify-content: center;
+}
+
+.mainGrid{
+display:grid;
+grid-template-columns: 33% 33% 33%;
+
+}
+
+.articlesCol{
+padding: 0 10px 0 10px;
+border-right:1px solid #bbb;
+}
+
+.list{
+  list-style-type: none;
+  border-bottom: 1px solid #bbb;
+  padding-bottom:8px;
+  margin-bottom:8px
+}
+
+.articlesColRight{
+  padding: 0 10px 0 10px
+}
+
+.picContainer{
+  display:flex;
+  margin-top: 10px;
+}
+
+.articleTitle{
+  text-decoration: underline;
+  cursor:pointer;
+  color:black;
+}
+
+.articleTitle:hover{
+  text-decoration: none;
+}
+
+.picture{
+  height: 150px;
+}
+
+.repostHeader{
+display:flex;
+justify-content: center;
+margin-bottom:25px;
+margin-top:10px;
+}
+
+.repostSection{
+  display: flex;
+   margin:15px;
+}
+
+.repostDescription{
+  width:80px;
+  margin-right: 10px;
+}
+
+.repostInput{
+  width:90%;
+}
+
+.deleteIcon{
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+}
