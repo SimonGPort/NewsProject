@@ -84,3 +84,26 @@ margin-top:10px;
   width: 15px;
   cursor: pointer;
 }
+
+.addIcon{
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+
+}
+.addLogoContainer{
+  display:flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.console{
+  display:flex;
+  margin-left:5px;
+  border-bottom:1px solid black;
+  padding-bottom:10px;
+}
+
+.consoleSection{
+  display:flex;
+}

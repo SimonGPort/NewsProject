@@ -5,6 +5,7 @@ import { Route, BrowserRouter, Link } from "react-router-dom";
 import MainPage from "./MainPage.jsx";
 import CreationRepost from "./CreationRepost.jsx";
 import Delete from "./Delete.jsx";
+import Original from "./Original.jsx"
 
 class App extends Component {
 
@@ -21,7 +22,9 @@ class App extends Component {
   delete = () => {
     return <Delete />;
   };
-
+  original = () => {
+    return <Original />;
+  };
 
   render = () => {
 
@@ -30,6 +33,7 @@ class App extends Component {
         <Route path="/" exact={true} render={this.renderMainPage} />
         <Route path="/creation" exact={true} render={this.creationRepost} />
         <Route path="/delete" exact={true} render={this.delete} />
+        <Route path="/original" exact={true} render={this.original} />
       </BrowserRouter>
 
     );
