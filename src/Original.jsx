@@ -9,14 +9,49 @@ class Original extends Component {
       title: "",
       urlPicTitle: "",
       consoleSelection: "",
-      txtSize: null,
+      txtSize: "16",
       txtStyle: "normal",
-      url: ""
+      url: "",
+      content: [],
+      textContent: []
     };
   }
 
   send = () => {
     console.log("send")
+
+  }
+
+  insertInContent = () => {
+    debugger
+    let tempContainer = []
+    let contentIndex = this.state.content.length
+
+    let mode = this.state.consoleSelection
+
+    if (mode === "txt") {
+      let fontSize = this.state.txtSize + "px"
+      let fontStyle = this.state.txtStyle + ""
+
+      tempContainer = [<div>
+        <input
+          style={{ fontSize: `${fontSize}`, fontStyle: `${fontStyle}` }}
+          onChange={(evt) => {
+            let textContentTemp = [...this.state.textContent]
+            textContentTemp[contentIndex] = evt.target.value
+            this.setState({ textContent: textContentTemp })
+          }}
+
+          value={this.state.textContent[contentIndex]} />
+      </div >]
+
+    }
+
+    let content = [...this.state.content]
+    content.push(tempContainer)
+    this.setState({ content })
+
+
 
   }
 
@@ -51,7 +86,9 @@ class Original extends Component {
 
           <div class="console">
             <div class="addLogoContainer">
-              <img src="add_logo.jpg" class="addIcon" />
+              <img src="add_logo.jpg" class="addIcon" onClick={() => {
+                this.insertInContent()
+              }} />
             </div>
             <div class="consoleSection">
               <div style={{ marginRight: "40px" }}>
@@ -114,8 +151,11 @@ class Original extends Component {
             </div>
 
 
-          </div>
 
+          </div>
+          <div id="pageContent">
+            {this.state.content}
+          </div>
 
         </div>
 
