@@ -28,14 +28,25 @@ class Original extends Component {
     let contentIndex = this.state.content.length
 
     let mode = this.state.consoleSelection
+    if (mode === "") {
+      return
+    }
 
     if (mode === "txt") {
       let fontSize = this.state.txtSize + "px"
       let fontStyle = this.state.txtStyle + ""
 
-      tempContainer = [<div>
-        <input
-          style={{ fontSize: `${fontSize}`, fontStyle: `${fontStyle}` }}
+      tempContainer = [<div style={{
+        margin: "20px",
+        height: "150px",
+        display: "flex"
+      }}>
+        <textarea
+          style={{
+            fontSize: `${fontSize}`, fontStyle: `${fontStyle}`, height: "100%",
+            width: "100%",
+            resize: "none"
+          }}
           onChange={(evt) => {
             let textContentTemp = [...this.state.textContent]
             textContentTemp[contentIndex] = evt.target.value
@@ -43,6 +54,17 @@ class Original extends Component {
           }}
 
           value={this.state.textContent[contentIndex]} />
+        <div style={{ display: "flex", width: "45px" }}>
+          <img class="deleteIcon" src="red-x.png" onClick={(contentIndex) => {
+            let textContentTemp = [...this.state.textContent]
+            textContentTemp.splice(contentIndex, 1)
+            let content = [...this.state.content]
+            content.splice(contentIndex, 1)
+            this.setState({ textContent: textContentTemp, content })
+          }} />
+          {contentIndex !== 0 && <img class="deleteIcon" src="arrowUp.png" />}
+          <img class="deleteIcon" src="arrowDown.png" />
+        </div>
       </div >]
 
     }
