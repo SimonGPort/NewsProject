@@ -69,8 +69,31 @@ class Original extends Component {
               content.splice(idx, 1)
               this.setState({ textContent: textContentTemp, content })
             }} />
-            {idx !== 0 && <img class="deleteIcon" src="arrowUp.png" />}
-            <img class="deleteIcon" src="arrowDown.png" />
+            {idx !== 0 && <img class="deleteIcon" src="arrowUp.png" onClick={() => {
+              let textContentTemp = [...this.state.textContent]
+              let saveTextContent = textContentTemp[idx]
+              textContentTemp.splice(idx, 1)
+              textContentTemp.splice(idx - 1, 0, saveTextContent)
+
+              let content = [...this.state.content]
+              let saveContent = content[idx]
+              content.splice(idx, 1)
+              content.splice(idx - 1, 0, saveContent)
+              this.setState({ textContent: textContentTemp, content })
+            }} />}
+
+            <img class="deleteIcon" src="arrowDown.png" onClick={() => {
+              let textContentTemp = [...this.state.textContent]
+              let saveTextContent = textContentTemp[idx]
+              textContentTemp.splice(idx, 1)
+              textContentTemp.splice(idx + 1, 0, saveTextContent)
+
+              let content = [...this.state.content]
+              let saveContent = content[idx]
+              content.splice(idx, 1)
+              content.splice(idx + 1, 0, saveContent)
+              this.setState({ textContent: textContentTemp, content })
+            }} />
           </div>
         </div >
 
