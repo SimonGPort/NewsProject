@@ -33,7 +33,8 @@ class Original extends Component {
       mode: this.state.consoleSelection,
       txtSize: this.state.txtSize + "px",
       txtStyle: this.state.txtStyle,
-      url: this.state.url
+      url: this.state.url,
+      link: false
     }
     let content = [...this.state.content]
     content.push(object)
@@ -63,39 +64,52 @@ class Original extends Component {
             }}
 
             value={this.state.textContent[idx]} />
-          <div style={{ display: "flex", width: "45px" }}>
-            <img class="deleteIcon" src="red-x.png" onClick={() => {
-              let textContentTemp = [...this.state.textContent]
-              textContentTemp.splice(idx, 1)
-              let content = [...this.state.content]
-              content.splice(idx, 1)
-              this.setState({ textContent: textContentTemp, content })
-            }} />
-            {idx !== 0 && <img class="deleteIcon" src="arrowUp.png" onClick={() => {
-              let textContentTemp = [...this.state.textContent]
-              let saveTextContent = textContentTemp[idx]
-              textContentTemp.splice(idx, 1)
-              textContentTemp.splice(idx - 1, 0, saveTextContent)
+          <div style={{ width: "45px" }}>
+            <div style={{ display: "flex", width: "45px", marginBottom: "15px" }}>
+              <img class="deleteIcon" src="red-x.png" onClick={() => {
+                let textContentTemp = [...this.state.textContent]
+                textContentTemp.splice(idx, 1)
+                let content = [...this.state.content]
+                content.splice(idx, 1)
+                this.setState({ textContent: textContentTemp, content })
+              }} />
+              {idx !== 0 && <img class="deleteIcon" src="arrowUp.png" onClick={() => {
+                let textContentTemp = [...this.state.textContent]
+                let saveTextContent = textContentTemp[idx]
+                textContentTemp.splice(idx, 1)
+                textContentTemp.splice(idx - 1, 0, saveTextContent)
 
-              let content = [...this.state.content]
-              let saveContent = content[idx]
-              content.splice(idx, 1)
-              content.splice(idx - 1, 0, saveContent)
-              this.setState({ textContent: textContentTemp, content })
-            }} />}
+                let content = [...this.state.content]
+                let saveContent = content[idx]
+                content.splice(idx, 1)
+                content.splice(idx - 1, 0, saveContent)
+                this.setState({ textContent: textContentTemp, content })
+              }} />}
 
-            <img class="deleteIcon" src="arrowDown.png" onClick={() => {
-              let textContentTemp = [...this.state.textContent]
-              let saveTextContent = textContentTemp[idx]
-              textContentTemp.splice(idx, 1)
-              textContentTemp.splice(idx + 1, 0, saveTextContent)
+              <img class="deleteIcon" src="arrowDown.png" onClick={() => {
+                let textContentTemp = [...this.state.textContent]
+                let saveTextContent = textContentTemp[idx]
+                textContentTemp.splice(idx, 1)
+                textContentTemp.splice(idx + 1, 0, saveTextContent)
 
-              let content = [...this.state.content]
-              let saveContent = content[idx]
-              content.splice(idx, 1)
-              content.splice(idx + 1, 0, saveContent)
-              this.setState({ textContent: textContentTemp, content })
-            }} />
+                let content = [...this.state.content]
+                let saveContent = content[idx]
+                content.splice(idx, 1)
+                content.splice(idx + 1, 0, saveContent)
+                this.setState({ textContent: textContentTemp, content })
+              }} />
+            </div>
+            <div> <img class="deleteIcon" src="link.png"
+              onClick={() => {
+                let content = [...this.state.content]
+                content[idx].link = !content[idx].link
+                this.setState({ content })
+              }}
+              style={{
+                backgroundColor: content.link ? "yellow" : ""
+              }}
+            />
+            </div >
           </div>
         </div >
 
@@ -103,12 +117,12 @@ class Original extends Component {
 
 
       }
-      // ici
+
       if (content.mode === "img") {
         let imgSrc = content.url
         result = <div style={{
           margin: "20px",
-          height: "300px",
+          height: "360px",
           display: "flex"
         }}>
 
@@ -119,8 +133,9 @@ class Original extends Component {
             justifyContent: "center"
           }}>
             <img src={imgSrc} style={{
-              height: "300px",
-              width: "300px",
+              height: "360px",
+              width: "360px",
+              objectFit: "cover"
             }} />
           </div>
           <div style={{ display: "flex", width: "45px" }}>
@@ -160,7 +175,7 @@ class Original extends Component {
         </div >
 
       }
-      // ici
+
       if (content.mode === "youtube") {
         let YTSrc = content.url
         result = <div style={{
@@ -240,7 +255,7 @@ class Original extends Component {
             }} />
           </div>
           <div class="repostSection" >
-            <div class="repostDescription">Picture Url</div><input class="repostInput" value={this.state.urlPicTitle} onChange={(evt) => {
+            <div class="repostDescription">Title Picture Url</div><input class="repostInput" value={this.state.urlPicTitle} onChange={(evt) => {
               this.setState({ urlPicTitle: evt.target.value })
             }} />
           </div>
