@@ -101,6 +101,63 @@ class Original extends Component {
 
 
       }
+      // ici
+      if (content.mode === "img") {
+        let imgSrc = this.state.url
+        result = <div style={{
+          margin: "20px",
+          height: "300px",
+          display: "flex"
+        }}>
+
+          <div style={{
+            height: "100%",
+            width: "100%",
+            display: "flex",
+            justifyContent: "center"
+          }}>
+            <img src={imgSrc} style={{
+              height: "300px",
+              width: "300px",
+            }} />
+          </div>
+          <div style={{ display: "flex", width: "45px" }}>
+            <img class="deleteIcon" src="red-x.png" onClick={() => {
+              let textContentTemp = [...this.state.textContent]
+              textContentTemp.splice(idx, 1)
+              let content = [...this.state.content]
+              content.splice(idx, 1)
+              this.setState({ textContent: textContentTemp, content })
+            }} />
+            {idx !== 0 && <img class="deleteIcon" src="arrowUp.png" onClick={() => {
+              let textContentTemp = [...this.state.textContent]
+              let saveTextContent = textContentTemp[idx]
+              textContentTemp.splice(idx, 1)
+              textContentTemp.splice(idx - 1, 0, saveTextContent)
+
+              let content = [...this.state.content]
+              let saveContent = content[idx]
+              content.splice(idx, 1)
+              content.splice(idx - 1, 0, saveContent)
+              this.setState({ textContent: textContentTemp, content })
+            }} />}
+
+            <img class="deleteIcon" src="arrowDown.png" onClick={() => {
+              let textContentTemp = [...this.state.textContent]
+              let saveTextContent = textContentTemp[idx]
+              textContentTemp.splice(idx, 1)
+              textContentTemp.splice(idx + 1, 0, saveTextContent)
+
+              let content = [...this.state.content]
+              let saveContent = content[idx]
+              content.splice(idx, 1)
+              content.splice(idx + 1, 0, saveContent)
+              this.setState({ textContent: textContentTemp, content })
+            }} />
+          </div>
+        </div >
+
+      }
 
 
       return result
