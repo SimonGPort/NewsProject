@@ -23,60 +23,68 @@ class Original extends Component {
   }
 
   insertInContent = () => {
-    debugger
-    let tempContainer = []
-    let contentIndex = this.state.content.length
 
-    let mode = this.state.consoleSelection
-    if (mode === "") {
+    if (this.state.consoleSelection === "") {
       return
     }
 
-    if (mode === "txt") {
-      let fontSize = this.state.txtSize + "px"
-      let fontStyle = this.state.txtStyle + ""
-
-      tempContainer = [<div style={{
-        margin: "20px",
-        height: "150px",
-        display: "flex"
-      }}>
-        <textarea
-          style={{
-            fontSize: `${fontSize}`, fontStyle: `${fontStyle}`, height: "100%",
-            width: "100%",
-            resize: "none"
-          }}
-          onChange={(evt) => {
-            let textContentTemp = [...this.state.textContent]
-            textContentTemp[contentIndex] = evt.target.value
-            this.setState({ textContent: textContentTemp })
-          }}
-
-          value={this.state.textContent[contentIndex]} />
-        <div style={{ display: "flex", width: "45px" }}>
-          <img class="deleteIcon" src="red-x.png" onClick={(contentIndex) => {
-            let textContentTemp = [...this.state.textContent]
-            textContentTemp.splice(contentIndex, 1)
-            let content = [...this.state.content]
-            content.splice(contentIndex, 1)
-            this.setState({ textContent: textContentTemp, content })
-          }} />
-          {contentIndex !== 0 && <img class="deleteIcon" src="arrowUp.png" />}
-          <img class="deleteIcon" src="arrowDown.png" />
-        </div>
-      </div >]
-
+    let object = {
+      mode: this.state.consoleSelection,
+      txtSize: this.state.txtSize + "px",
+      txtStyle: this.state.txtStyle,
     }
-
     let content = [...this.state.content]
-    content.push(tempContainer)
+    content.push(object)
     this.setState({ content })
-
-
-
   }
+  // ici
+  renderContent = () => {
+    let value = this.state.content.map((content, idx) => {
+      let result = ""
 
+      if (content.mode === "txt") {
+        result = <div style={{
+          margin: "20px",
+          height: "150px",
+          display: "flex"
+        }}>
+          <textarea
+            style={{
+              fontSize: `${content.txtSize}`, fontStyle: `${content.txtStyle}`, height: "100%",
+              width: "100%",
+              resize: "none"
+            }}
+            onChange={(evt) => {
+              let textContentTemp = [...this.state.textContent]
+              textContentTemp[idx] = evt.target.value
+              this.setState({ textContent: textContentTemp })
+            }}
+
+            value={this.state.textContent[idx]} />
+          <div style={{ display: "flex", width: "45px" }}>
+            <img class="deleteIcon" src="red-x.png" onClick={() => {
+              let textContentTemp = [...this.state.textContent]
+              textContentTemp.splice(idx, 1)
+              let content = [...this.state.content]
+              content.splice(idx, 1)
+              this.setState({ textContent: textContentTemp, content })
+            }} />
+            {idx !== 0 && <img class="deleteIcon" src="arrowUp.png" />}
+            <img class="deleteIcon" src="arrowDown.png" />
+          </div>
+        </div >
+
+
+
+
+      }
+
+
+      return result
+    })
+
+    return value
+  }
 
 
 
@@ -176,7 +184,7 @@ class Original extends Component {
 
           </div>
           <div id="pageContent">
-            {this.state.content}
+            {this.renderContent()}
           </div>
 
         </div>
