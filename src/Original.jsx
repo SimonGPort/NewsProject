@@ -9,6 +9,7 @@ class Original extends Component {
     this.state = {
       title: "",
       urlPicTitle: "",
+      col: "Left",
       consoleSelection: "",
       txtSize: "16",
       txtStyle: "normal",
@@ -18,8 +19,53 @@ class Original extends Component {
     };
   }
 
-  send = () => {
-    console.log("send")
+  send = async () => {
+
+    let content = [...this.state.content]
+    let textContent = [...this.state.textContent]
+    content = content.map((el, idx) => {
+      el.text = textContent[idx]
+      return el
+    })
+
+    content = content.filter((el) => {
+      if (el.mode === "txt" && el.text === undefined) { return false }
+      return true
+    })
+
+
+    let articleToSend = {
+      title: this.state.title,
+      pic: this.state.urlPicTitle
+    }
+
+    let response = await fetch("/originalNewsSent", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(
+        { column: this.state.col, content, article: articleToSend }
+      ),
+    });
+    let body = await response.text();
+    body = JSON.parse(body);
+    if (body.success) {
+      this.setState({
+        title: "",
+        urlPicTitle: "",
+        col: "Left",
+        consoleSelection: "",
+        txtSize: "16",
+        txtStyle: "normal",
+        url: "",
+        content: [],
+        textContent: []
+      })
+      alert("the original news is sent")
+    }
+
+
 
   }
 
@@ -40,7 +86,7 @@ class Original extends Component {
     content.push(object)
     this.setState({ content })
   }
-  // ici
+
   renderContent = () => {
     let value = this.state.content.map((content, idx) => {
       let result = ""
@@ -258,6 +304,19 @@ class Original extends Component {
             <div class="repostDescription">Title Picture Url</div><input class="repostInput" value={this.state.urlPicTitle} onChange={(evt) => {
               this.setState({ urlPicTitle: evt.target.value })
             }} />
+          </div>
+          <div class="repostSection" >
+            <div class="repostDescription">Which column</div>
+            <select
+              onChange={(evt) => {
+                this.setState({ col: evt.target.value })
+              }}
+              className="creation-event-scrollmenu"
+            >
+              <option>Left</option>
+              <option>Center</option>
+              <option>Right</option>
+            </select>
           </div>
 
 

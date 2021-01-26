@@ -27,6 +27,28 @@ app.post("/newsSent", (req, res) => {
 
 })
 
+app.post("/originalNewsSent", (req, res) => {
+
+    let article = req.body.article
+    let column = req.body.column
+    let content = req.body.content
+
+    // A CONTINUER
+
+    // if (column === "Right") {
+    //     articlesRightCol.push(article)
+    // }
+    // if (column === "Center") {
+    //     articlesCenterCol.push(article)
+    // }
+    // if (column === "Left") {
+    //     articlesLeftCol.push(article)
+    // }
+
+    res.send(JSON.stringify({ success: true }));
+
+})
+
 app.post("/deleteAllNews", (req, res) => {
     articlesRightCol = []
     articlesCenterCol = []
