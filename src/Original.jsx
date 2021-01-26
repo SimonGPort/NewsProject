@@ -22,6 +22,8 @@ class Original extends Component {
   send = async () => {
 
     let content = [...this.state.content]
+    if (content === []) { return }
+
     let textContent = [...this.state.textContent]
     content = content.map((el, idx) => {
       el.text = textContent[idx]
