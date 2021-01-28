@@ -51,9 +51,6 @@ class OriginalPresentation extends Component {
 
         </div >
 
-
-
-
       }
 
       // if (content.mode === "img") {
