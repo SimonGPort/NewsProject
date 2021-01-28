@@ -6,6 +6,7 @@ import MainPage from "./MainPage.jsx";
 import CreationRepost from "./CreationRepost.jsx";
 import Delete from "./Delete.jsx";
 import Original from "./Original.jsx"
+import OriginalPresentation from "./OriginalPresentation.jsx"
 
 class App extends Component {
 
@@ -26,6 +27,7 @@ class App extends Component {
     return <Original />;
   };
 
+
   render = () => {
 
     return (
@@ -34,6 +36,11 @@ class App extends Component {
         <Route path="/creation" exact={true} render={this.creationRepost} />
         <Route path="/delete" exact={true} render={this.delete} />
         <Route path="/original" exact={true} render={this.original} />
+        <Route path="/populist/:numero" exact={true} render={(route) => {
+          return (
+            <OriginalPresentation numero={route.match.params.numero} />
+          )
+        }} />
       </BrowserRouter>
 
     );

@@ -168,6 +168,19 @@ app.get("/articles", (req, res) => {
         }))
 })
 
+app.get("/originalArticle/:idx", (req, res) => {
+    let idx = JSON.parse(req.params.idx);
+    let content = originalContent[idx]
+
+    res.send(
+        JSON.stringify({
+            success: true,
+            content
+        }))
+})
+
+
+
 app.all('/*', (req, res, next) => { // needed for react router
     res.sendFile(__dirname + '/public/index.html');
 })

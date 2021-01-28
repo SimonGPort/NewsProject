@@ -22,7 +22,7 @@ class Original extends Component {
   send = async () => {
 
     let content = [...this.state.content]
-    if (content === []) { return }
+    if (content.length === 0) { return }
 
     let textContent = [...this.state.textContent]
     content = content.map((el, idx) => {
