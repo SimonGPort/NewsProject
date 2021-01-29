@@ -172,10 +172,29 @@ app.get("/originalArticle/:idx", (req, res) => {
     let idx = JSON.parse(req.params.idx);
     let content = originalContent[idx]
 
+    let sideContent = []
+
+    articlesLeftCol.forEach((article) => {
+        if (article.original === false) {
+            sideContent.push(article)
+        }
+    })
+    articlesCenterCol.forEach((article) => {
+        if (article.original === false) {
+            sideContent.push(article)
+        }
+    })
+    articlesRightCol.forEach((article) => {
+        if (article.original === false) {
+            sideContent.push(article)
+        }
+    })
+
     res.send(
         JSON.stringify({
             success: true,
-            content
+            content,
+            sideContent
         }))
 })
 

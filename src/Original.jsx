@@ -38,7 +38,8 @@ class Original extends Component {
 
     let articleToSend = {
       title: this.state.title,
-      pic: this.state.urlPicTitle
+      pic: this.state.urlPicTitle,
+      original: true
     }
 
     let response = await fetch("/originalNewsSent", {

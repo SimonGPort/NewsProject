@@ -20,7 +20,8 @@ class CreationRepost extends Component {
     let articleToSend = {
       title: this.state.title,
       link: this.state.link,
-      pic: this.state.pic
+      pic: this.state.pic,
+      original: false
     }
 
     let response = await fetch("/newsSent", {

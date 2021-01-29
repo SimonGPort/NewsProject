@@ -27,7 +27,6 @@ class OriginalPresentation extends Component {
     }
   }
 
-  // ici
   renderContent = () => {
     let value = this.state.contents.map((content, idx) => {
       let result = ""
