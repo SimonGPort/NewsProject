@@ -183,8 +183,8 @@ class Original extends Component {
           }}>
             <img src={imgSrc} style={{
               height: "360px",
-              width: "360px",
-              objectFit: "cover"
+              objectFit: "cover",
+              overflow: "hidden"
             }} />
           </div>
           <div style={{ display: "flex", width: "45px" }}>

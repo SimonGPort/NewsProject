@@ -7,7 +7,8 @@ class OriginalPresentation extends Component {
   constructor() {
     super();
     this.state = {
-      contents: []
+      contents: [],
+      sideContents: []
     };
   }
 
@@ -23,7 +24,7 @@ class OriginalPresentation extends Component {
     body = JSON.parse(body);
 
     if (body.success) {
-      this.setState({ contents: body.content })
+      this.setState({ contents: body.content, sideContents: body.sideContent })
     }
   }
 
@@ -32,19 +33,12 @@ class OriginalPresentation extends Component {
       let result = ""
 
       if (content.mode === "txt") {
-        result = <div style={{
-          margin: "20px",
-          height: "150px",
-          display: "flex"
-        }}>
+        result = <div>
           <p
             style={{
               fontSize: `${content.txtSize}`, fontStyle: `${content.txtStyle}`, height: "100%",
               width: "100%",
-              resize: "none"
             }}
-
-          // value={content.text} 
           >{content.text}
           </p>
 
@@ -52,55 +46,65 @@ class OriginalPresentation extends Component {
 
       }
 
-      // if (content.mode === "img") {
-      //   let imgSrc = content.url
-      //   result = <div style={{
-      //     margin: "20px",
-      //     height: "360px",
-      //     display: "flex"
-      //   }}>
+      if (content.mode === "img") {
+        let imgSrc = content.url
+        result = <div style={{
+          margin: "20px 0 20px 0",
+          height: "360px",
+          display: "flex"
+        }}>
 
-      //     <div style={{
-      //       height: "100%",
-      //       width: "100%",
-      //       display: "flex",
-      //       justifyContent: "center"
-      //     }}>
-      //       <img src={imgSrc} style={{
-      //         height: "360px",
-      //         width: "360px",
-      //         objectFit: "cover"
-      //       }} />
-      //     </div>
-      //   </div >
+          <div style={{
+            height: "100%",
+            width: "100%",
+            // display: "flex",
+            // justifyContent: "center"
+          }}>
+            <img src={imgSrc} style={{
+              height: "360px",
+              objectFit: "cover",
+              overflow: "hidden"
+            }} />
+          </div>
+        </div >
 
-      // }
+      }
 
-      // if (content.mode === "youtube") {
-      //   let YTSrc = content.url
-      //   result = <div style={{
-      //     margin: "20px",
-      //     height: "360px",
-      //     display: "flex"
-      //   }}>
+      if (content.mode === "youtube") {
+        let YTSrc = content.url
+        result = <div style={{
+          margin: "20px 0 20px 0",
+          height: "360px",
+          display: "flex"
+        }}>
 
-      //     <div style={{
-      //       height: "100%",
-      //       width: "100%",
-      //       display: "flex",
-      //       justifyContent: "center"
-      //     }}>
-      //       <ReactPlayer
-      //         url={YTSrc}
-      //       />
-      //     </div>
+          <div style={{
+            height: "100%",
+            width: "100%",
+            // display: "flex",
+            // justifyContent: "center"
+          }}>
+            <ReactPlayer
+              controls={true}
+              url={YTSrc}
+            />
+          </div>
 
-      //   </div >
+        </div >
 
-      // }
+      }
 
 
       return result
+    })
+
+    return value
+  }
+
+
+  renderSideContent = () => {
+    let value = this.state.sideContents.map((article, idx) => {
+      return <li key={idx} class="list"><a class="articleTitle" href={article.link} >{article.title}</a>{article.pic && (<div class="picContainer"><img class="picture" src={article.pic} /></div>)}</li>
     })
 
     return value
@@ -114,8 +118,13 @@ class OriginalPresentation extends Component {
         <div id="header">
           <img src="https://populist.press/wp-content/uploads/2021/01/FULL-logo-large-7.png" alt="The Populist" />
         </div>
-        <div>
-          {this.renderContent()}
+        <div class="originalPresentationContainer">
+          <div class="originalPresentationSmallContainer">
+            <div>{this.renderContent()}</div>
+            <div>
+              <ul>{this.renderSideContent()}</ul>
+            </div>
+          </div>
         </div >
       </div>
     );

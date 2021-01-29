@@ -15,7 +15,6 @@ class CreationRepost extends Component {
   }
 
   send = async () => {
-
     if (this.state.title === "") { return }
     let articleToSend = {
       title: this.state.title,
