@@ -115,11 +115,26 @@ class OriginalPresentation extends Component {
 
     return (
       <div>
+        <div style={{
+          position: "absolute",
+          margin: "10px",
+          right: "0"
+        }}>
+          <a href={"https://www.facebook.com/wearepopulists/"} > <img src="../fbLogo.png" style={{ width: "40px", marginRight: "15px", cursor: "pointer" }} /></a>
+          <a href={"https://gab.com/thePopulist"} ><img src="../gabLogo.png" style={{ width: "40px", cursor: "pointer" }} /></a>
+        </div>
         <div id="header">
           <img src="https://populist.press/wp-content/uploads/2021/01/FULL-logo-large-7.png" alt="The Populist" />
         </div>
         <div class="originalPresentationContainer">
-          <div class="originalPresentationSmallContainer">
+          <div
+            style={{
+              margin: "0 40px 0 40px",
+              display: "grid",
+              gridTemplateColumns: this.state.sideContents.length > 0 ? "80% 20%" : "100%",
+              width: "75%",
+            }}
+          >
             <div>{this.renderContent()}</div>
             <div>
               <ul>{this.renderSideContent()}</ul>

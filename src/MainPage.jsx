@@ -43,6 +43,14 @@ class MainPage extends Component {
 
     return (
       <>
+        <div style={{
+          position: "absolute",
+          margin: "10px",
+          right: "0"
+        }}>
+          <a href={"https://www.facebook.com/wearepopulists/"} > <img src="fbLogo.png" style={{ width: "40px", marginRight: "15px", cursor: "pointer" }} /></a>
+          <a href={"https://gab.com/thePopulist"} ><img src="gabLogo.png" style={{ width: "40px", cursor: "pointer" }} /></a>
+        </div>
         <div id="header">
           <img src="https://populist.press/wp-content/uploads/2021/01/FULL-logo-large-7.png" alt="The Populist" />
         </div>
