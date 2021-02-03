@@ -7,6 +7,7 @@ import CreationRepost from "./CreationRepost.jsx";
 import Delete from "./Delete.jsx";
 import Original from "./Original.jsx"
 import OriginalPresentation from "./OriginalPresentation.jsx"
+import Mail from "./Mail.jsx"
 
 class App extends Component {
 
@@ -26,6 +27,9 @@ class App extends Component {
   original = () => {
     return <Original />;
   };
+  mail = () => {
+    return <Mail />;
+  };
 
 
   render = () => {
@@ -34,6 +38,7 @@ class App extends Component {
       <BrowserRouter>
         <Route path="/" exact={true} render={this.renderMainPage} />
         <Route path="/creation" exact={true} render={this.creationRepost} />
+        <Route path="/mail" exact={true} render={this.mail} />
         <Route path="/delete" exact={true} render={this.delete} />
         <Route path="/original" exact={true} render={this.original} />
         <Route path="/populist/:numero" exact={true} render={(route) => {

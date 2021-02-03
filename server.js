@@ -8,6 +8,31 @@ let articlesLeftCol = [];
 let articlesRightCol = [];
 let articlesCenterCol = [];
 let originalContent = [];
+let mailUsers = []
+
+
+app.post("/mailUser", (req, res) => {
+
+    let name = req.body.user.name
+    let email = req.body.user.email
+    let elem = { email: email, name: name }
+
+    let isEmailAlreadyThere = false
+    mailUsers.forEach((userObj) => {
+        if (userObj.email === email) {
+            isEmailAlreadyThere = true
+        }
+    })
+
+    if (isEmailAlreadyThere) {
+        res.send(JSON.stringify({ success: false }));
+    }
+
+    mailUsers.push(elem)
+    res.send(JSON.stringify({ success: true }));
+})
+
+
 
 app.post("/newsSent", (req, res) => {
 

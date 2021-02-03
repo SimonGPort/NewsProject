@@ -43,6 +43,28 @@ class MainPage extends Component {
 
     return (
       <>
+
+        <div style={{
+          position: "absolute",
+          margin: "10px",
+          left: "0",
+          cursor: "pointer"
+        }}
+          onMouseOver={() => {
+            let text = document.getElementById("mailText")
+            text.style.color = "red"
+          }}
+          onMouseOut={() => {
+            let text = document.getElementById("mailText")
+            text.style.color = "black"
+          }}
+        >
+          <a href={"/mail"} style={{ textDecoration: "none" }}>
+            <div style={{ display: "flex", justifyContent: "center" }}><img src="email.svg" style={{ width: "25px" }} /></div>
+            <div id="mailText">Join our mailing list</div>
+          </a>
+        </div>
+
         <div style={{
           position: "absolute",
           margin: "10px",
